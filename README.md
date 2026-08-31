@@ -1,7 +1,7 @@
-# 👨‍💼 Employee Management System
+# 📝 Online Examination System
 
 <p align="center">
-  <b>A Java Spring Boot based Employee Management System</b>
+  <b>A Java Spring Boot based Online Examination System</b>
 </p>
 
 <p align="center">
@@ -10,90 +10,86 @@
 
 ---
 
-## 📌 About The Project
+## 📌 Project Overview
 
-The **Employee Management System (EMS)** is a web-based application developed using **Java and Spring Boot** to manage employee information.
+The **Online Examination System** is a web-based application designed to simplify and manage the process of conducting examinations online.
 
-The project follows a layered architecture and uses **Spring Data JPA** for database persistence and **MySQL** as the relational database. The web interface is developed using **JSP and JSTL**.
+The application is developed using **Java and Spring Boot**, with **Spring MVC** for web request handling, **Spring Data JPA** for database operations, **JSP/JSTL** for the user interface, and **MySQL** for data storage.
 
-This project demonstrates practical implementation of backend development concepts such as:
-
-* Spring Boot
-* Spring MVC
-* Spring Data JPA
-* Hibernate
-* MySQL database integration
-* JSP/JSTL
-* Maven
-* Layered architecture
+The project includes a `database.sql` file for setting up the required database.
 
 ---
 
 ## 🚀 Features
 
-* 👤 Employee management
-* ➕ Add employee information
-* 📋 View employee information
-* ✏️ Update employee information
-* 🗑️ Delete employee information
-* 💾 MySQL database persistence
-* 🔗 Spring Data JPA integration
-* 🌐 Spring MVC web application
-* 🖥️ JSP/JSTL based user interface
+### 👨‍🎓 Student
 
-> The exact features and URL mappings depend on the controllers, services, entities and JSP pages included in the project source.
+* Student login
+* Access online examinations
+* View examination questions
+* Submit answers
+* Complete examinations
+* View examination results
+
+### 👨‍💼 Admin
+
+* Admin login
+* Manage users
+* Manage examinations
+* Manage questions
+* Manage examination data
+* View examination-related information
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technologies Used
 
-| Technology              | Usage                 |
-| ----------------------- | --------------------- |
-| ☕ Java 21               | Backend programming   |
-| 🌱 Spring Boot 4.1.1    | Application framework |
-| 🌐 Spring Web MVC       | Web layer             |
-| 🗃️ Spring Data JPA     | Database operations   |
-| 🐬 MySQL                | Database              |
-| 📄 JSP                  | Frontend/view layer   |
-| 🔧 JSTL                 | JSP functionality     |
-| 📦 Maven                | Dependency management |
-| 🚀 Apache Tomcat/Jasper | JSP processing        |
-
-The project's `pom.xml` confirms these major dependencies and Java version.
+| Technology                | Purpose                       |
+| ------------------------- | ----------------------------- |
+| ☕ Java 21                 | Backend Development           |
+| 🌱 Spring Boot 4.1.1      | Application Framework         |
+| 🌐 Spring MVC             | Web Request Handling          |
+| 🗃️ Spring Data JPA       | Database Operations           |
+| 🔄 Hibernate              | ORM                           |
+| 🐬 MySQL                  | Database                      |
+| 📄 JSP                    | View Layer                    |
+| 🔧 JSTL                   | JSP Functionality             |
+| 🚀 Apache Tomcat / Jasper | JSP Processing                |
+| 📦 Maven                  | Build & Dependency Management |
 
 ---
 
 ## 🏗️ Project Architecture
 
 ```text
-                ┌──────────────────────┐
-                │      JSP / JSTL      │
-                │    User Interface    │
-                └──────────┬───────────┘
-                           │
-                           ▼
-                ┌──────────────────────┐
-                │     Controller       │
-                │    Spring MVC        │
-                └──────────┬───────────┘
-                           │
-                           ▼
-                ┌──────────────────────┐
-                │       Service        │
-                │    Business Logic    │
-                └──────────┬───────────┘
-                           │
-                           ▼
-                ┌──────────────────────┐
-                │      Repository      │
-                │   Spring Data JPA   │
-                └──────────┬───────────┘
-                           │
-                           ▼
-                ┌──────────────────────┐
-                │        MySQL         │
-                │       Database       │
-                └──────────────────────┘
+                    ┌─────────────────────┐
+                    │     JSP / JSTL      │
+                    │    User Interface   │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │     Controller      │
+                    │     Spring MVC      │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │       Service       │
+                    │   Business Logic    │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │     Repository      │
+                    │   Spring Data JPA   │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │       MySQL         │
+                    │  online_exam_db     │
+                    └─────────────────────┘
 ```
 
 ---
@@ -101,7 +97,7 @@ The project's `pom.xml` confirms these major dependencies and Java version.
 ## 📂 Project Structure
 
 ```text
-EMS/
+Online-Examination-System/
 │
 ├── src/
 │   ├── main/
@@ -128,36 +124,36 @@ EMS/
 
 ## 🗄️ Database Setup
 
-A `database.sql` file is included in the project.
+The application uses **MySQL**.
 
-### 1. Install MySQL
+### Database Name
 
-Install MySQL Server and MySQL Workbench.
-
-### 2. Create the Database
-
-For example:
-
-```sql
-CREATE DATABASE ems;
+```text
+online_exam_db
 ```
 
-### 3. Execute Database Script
+### Create Database
 
-Open the provided:
+```sql
+CREATE DATABASE online_exam_db;
+```
+
+### Import Database
+
+The project contains:
 
 ```text
 database.sql
 ```
 
-and execute it in MySQL Workbench.
+Open the file using **MySQL Workbench** and execute the SQL script.
 
-### 4. Configure Database Connection
+### Configure Database Connection
 
 Update your Spring Boot configuration:
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/ems
+spring.datasource.url=jdbc:mysql://localhost:3306/online_exam_db
 spring.datasource.username=root
 spring.datasource.password=YOUR_PASSWORD
 
@@ -165,55 +161,59 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
 
-Replace `YOUR_PASSWORD` with your local MySQL password.
+Replace `YOUR_PASSWORD` with your MySQL password.
 
 ---
 
-## ⚙️ Requirements
+## ⚙️ Prerequisites
 
 Before running the project, make sure you have:
 
-* Java Development Kit **21**
+* Java JDK 21
 * MySQL
 * Maven
 * Git
-* IDE such as:
-
-  * Eclipse
-  * IntelliJ IDEA
-  * Spring Tool Suite
+* Eclipse / IntelliJ IDEA / Spring Tool Suite
 
 ---
 
-## ▶️ Running the Application
+## ▶️ How to Run
 
-### Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
-### Navigate to the Project
+### 2. Navigate to the Project
 
 ```bash
-cd EMS
+cd Online-Examination-System
 ```
 
-### Run Using Maven
+### 3. Configure MySQL
+
+Create the `online_exam_db` database and execute the `database.sql` file.
+
+### 4. Configure Application
+
+Update the database username and password in the Spring Boot configuration file.
+
+### 5. Run the Application
+
+Using Maven:
 
 ```bash
 mvn spring-boot:run
 ```
 
-### Or Using Maven Wrapper
-
-**Windows:**
+### Windows
 
 ```cmd
 mvnw.cmd spring-boot:run
 ```
 
-**Linux/macOS:**
+### Linux / macOS
 
 ```bash
 ./mvnw spring-boot:run
@@ -221,45 +221,55 @@ mvnw.cmd spring-boot:run
 
 ---
 
-## 🌐 Open in Browser
+## 🌐 Access the Application
 
-After successfully starting the application:
+Once the application starts successfully, open:
 
 ```text
 http://localhost:8080/
 ```
 
-The exact application page depends on the controller mappings configured in the project.
+The exact page URL depends on the controller mappings implemented in the project.
+
+---
+
+## 🔐 User Roles
+
+The system includes user information and supports an **ADMIN** role.
+
+```text
+ADMIN
+```
+
+Student functionality is provided through the examination workflow implemented in the application.
 
 ---
 
 ## 🧪 Testing
 
-Run the tests using:
+Run the application tests using:
 
 ```bash
 mvn test
 ```
 
-Or on Windows:
+On Windows:
 
 ```cmd
 mvnw.cmd test
 ```
 
-The project includes Spring Boot testing dependencies for JPA and Web MVC.
-
 ---
 
 ## 📦 Build
 
-Create the application JAR:
+Build the project using:
 
 ```bash
 mvn clean package
 ```
 
-Then run:
+Run the generated JAR:
 
 ```bash
 java -jar target/EMS-0.0.1-SNAPSHOT.jar
@@ -269,44 +279,67 @@ java -jar target/EMS-0.0.1-SNAPSHOT.jar
 
 ## 📸 Screenshots
 
-Add screenshots of your application here.
+Add your application screenshots here.
+
+Create a folder:
+
+```text
+screenshots/
+```
 
 Example:
+
+```text
+screenshots/
+├── login.png
+├── student-dashboard.png
+├── exam.png
+├── result.png
+└── admin-dashboard.png
+```
+
+Then add them to the README:
 
 ```markdown
 ## 📸 Screenshots
 
-### Employee Dashboard
+### Login Page
 
-![Employee Dashboard](screenshots/dashboard.png)
+![Login Page](screenshots/login.png)
 
-### Add Employee
+### Student Dashboard
 
-![Add Employee](screenshots/add-employee.png)
+![Student Dashboard](screenshots/student-dashboard.png)
 
-### Employee List
+### Examination Page
 
-![Employee List](screenshots/employee-list.png)
+![Examination Page](screenshots/exam.png)
+
+### Result Page
+
+![Result Page](screenshots/result.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
 ```
-
-Create a `screenshots` folder in your GitHub repository and place your application screenshots inside it.
 
 ---
 
 ## 🔮 Future Enhancements
 
-Some possible improvements for the project:
-
-* 🔐 User authentication and authorization
-* 👥 Role-based access control
-* 🔎 Employee search
+* ⏱️ Online exam countdown timer
+* 🔐 Secure authentication
+* 🔑 Password encryption
+* 👥 Role-based authorization
+* 📝 Question bank management
+* 📊 Student performance analytics
+* 📈 Result dashboard
+* 🔎 Search and filtering
 * 📄 Pagination
-* 🏢 Department management
-* ✅ Server-side form validation
-* 📊 Employee statistics dashboard
-* 🌐 REST API development
-* 📚 Swagger/OpenAPI documentation
-* 🎨 Bootstrap responsive UI
+* 📧 Email result notifications
+* 🎨 Responsive Bootstrap UI
+* 🌐 REST API integration
 * 🐳 Docker support
 * ☁️ Cloud deployment
 
@@ -314,17 +347,19 @@ Some possible improvements for the project:
 
 ## 🎯 Learning Outcomes
 
-Through this project, I practiced:
+This project provides practical experience with:
 
-* Developing backend applications using **Java**
-* Building applications with **Spring Boot**
-* Implementing **Spring MVC**
-* Connecting applications with **MySQL**
-* Using **Spring Data JPA**
-* Working with **JSP and JSTL**
-* Managing dependencies using **Maven**
-* Applying layered architecture
-* Performing CRUD-based database operations
+* Java backend development
+* Spring Boot
+* Spring MVC
+* Spring Data JPA
+* Hibernate
+* MySQL database integration
+* JSP and JSTL
+* Maven
+* CRUD operations
+* Layered application architecture
+* Web application development
 
 ---
 
@@ -334,7 +369,7 @@ Through this project, I practiced:
 
 **B.Tech – Computer Science Engineering**
 
-### Skills Used
+### Technologies
 
 `Java` `Spring Boot` `Spring MVC` `JPA` `Hibernate` `MySQL` `JSP` `JSTL` `Maven`
 
@@ -342,7 +377,7 @@ Through this project, I practiced:
 
 ## ⭐ Support
 
-If you found this project useful, consider giving the repository a ⭐ on GitHub.
+If you find this project useful, please consider giving the repository a ⭐ on GitHub.
 
 ---
 
