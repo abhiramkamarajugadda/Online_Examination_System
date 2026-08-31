@@ -1,0 +1,1 @@
+<%@ page contentType="text/html;charset=UTF-8" %><!DOCTYPE html><html><head><title>Admin</title><link rel="stylesheet" href="/css/style.css"></head><body><nav><h2>ExamSphere Admin</h2><a href="/logout">Logout</a></nav><main><h1>Admin Dashboard</h1><a class="btn" href="/admin/exam/create">Create Exam</a><a class="btn" href="/admin/exams">Manage Exams</a></main></body></html>

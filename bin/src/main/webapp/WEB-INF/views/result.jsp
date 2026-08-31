@@ -1,0 +1,1 @@
+<%@ page contentType="text/html;charset=UTF-8" %><!DOCTYPE html><html><head><title>Result</title><link rel="stylesheet" href="/css/style.css"></head><body class="auth-body"><div class="result-card"><h1>🎉 Exam Completed!</h1><h2>${result.score} / ${result.totalMarks}</h2><p>${result.exam.title}</p><a class="btn" href="/student/dashboard">Dashboard</a></div></body></html>
