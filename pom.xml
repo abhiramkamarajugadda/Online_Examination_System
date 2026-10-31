@@ -12,6 +12,8 @@
 	<groupId>EMS</groupId>
 	<artifactId>EMS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- WAR so the JSPs under src/main/webapp are packaged and render under embedded Tomcat (java -jar app.war) -->
+	<packaging>war</packaging>
 	<name />
 	<description />
 	<url />
@@ -51,6 +53,16 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- BCrypt password hashing only (no Spring Security filter chain) -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
@@ -89,6 +101,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

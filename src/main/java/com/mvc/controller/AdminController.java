@@ -41,9 +41,12 @@ public class AdminController {
 		this.userService = userService;
 	}
 
+	@org.springframework.beans.factory.annotation.Value("${app.admin.email:admin@examsphere.com}")
+	private String adminEmail;
+
 	private boolean checkAdmin(HttpSession session) {
 		String email = (String) session.getAttribute("adminEmail");
-		return email != null && "admin@examsphere.com".equalsIgnoreCase(email);
+		return email != null && adminEmail.equalsIgnoreCase(email);
 	}
 
 	// Admin Dashboard
@@ -324,7 +327,7 @@ public class AdminController {
 		existing.setInstitution(user.getInstitution());
 		existing.setUsername(user.getUsername());
 		if (user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
-			existing.setPassword(user.getPassword().trim());
+			userService.changePassword(existing, user.getPassword().trim());
 		}
 
 		userService.saveUser(existing);

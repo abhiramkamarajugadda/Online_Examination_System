@@ -1,5 +1,6 @@
 package com.mvc.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,9 +17,15 @@ import jakarta.servlet.http.HttpSession;
 public class AuthController {
 
 	private final UserService userService;
+	private final String adminEmail;
+	private final String adminPassword;
 
-	public AuthController(UserService userService) {
+	public AuthController(UserService userService,
+	                      @Value("${app.admin.email:admin@examsphere.com}") String adminEmail,
+	                      @Value("${app.admin.password:admin123}") String adminPassword) {
 		this.userService = userService;
+		this.adminEmail = adminEmail;
+		this.adminPassword = adminPassword;
 	}
 
 	// Home page
@@ -44,8 +51,13 @@ public class AuthController {
 			return mv;
 		}
 
-		user.setRole("STUDENT");
-		userService.saveUser(user);
+		if (user.getPassword() == null || user.getPassword().isBlank()) {
+			ModelAndView mv = new ModelAndView("register");
+			mv.addObject("errorMsg", "Please choose a password.");
+			return mv;
+		}
+		user.setId(null);
+		userService.registerStudent(user);
 
 		ModelAndView mv = new ModelAndView("login");
 		mv.addObject("successMsg", "Registration successful! You can now sign in.");
@@ -62,7 +74,7 @@ public class AuthController {
 	@PostMapping("/login")
 	public ModelAndView login(@RequestParam String email, @RequestParam String password, HttpSession session) {
 		// Admin login check
-		if ("admin@examsphere.com".equalsIgnoreCase(email) && "admin123".equals(password)) {
+		if (adminEmail.equalsIgnoreCase(email) && adminPassword.equals(password)) {
 			session.setAttribute("adminEmail", email);
 			session.setAttribute("adminName", "Administrator");
 			return new ModelAndView("redirect:/admin/dashboard");
