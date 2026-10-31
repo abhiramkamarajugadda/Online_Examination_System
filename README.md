@@ -6,9 +6,11 @@ A Spring Boot web application for running timed online exams, with separate Admi
 
 ## Live Demo
 
-**Live link:** _coming soon (Render free tier)_
+**Live link:** [abhi-examsphere.onrender.com](https://abhi-examsphere.onrender.com)
 
-Demo student login: `demo@examsphere.com` / `demo123` (a public demo account). Try the seeded **Java Fundamentals (Sample)** exam, or register your own student account. The free server sleeps when idle, so the first visit can take about a minute to wake up.
+> Note: the free server sleeps when idle, so the first visit may take about a minute to wake up.
+
+Demo student login: `demo@examsphere.com` / `demo123` (a public demo account). Try the seeded **Java Fundamentals (Sample)** exam, or register your own student account.
 
 ## Features
 
