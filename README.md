@@ -104,7 +104,11 @@ Tables are created by Hibernate (`spring.jpa.hibernate.ddl-auto=update`).
    ```sql
    CREATE DATABASE online_exam;
    ```
-3. Set `spring.datasource.username` and `spring.datasource.password` in `src/main/resources/application.properties` to your local MySQL values.
+3. Set the database credentials as environment variables (`application.properties` reads `${DB_USERNAME:root}` and `${DB_PASSWORD:}`):
+   ```bash
+   export DB_USERNAME=root
+   export DB_PASSWORD=your_mysql_password
+   ```
 4. Run the application.
    ```bash
    mvn spring-boot:run
@@ -112,7 +116,7 @@ Tables are created by Hibernate (`spring.jpa.hibernate.ddl-auto=update`).
    On Windows: `mvnw.cmd spring-boot:run`
 5. Open `http://localhost:4545`.
 
-The admin account is defined in `AuthController`; change it before any real use.
+The admin login defined in `AuthController` is a demo-only default for local testing; change it before any real use.
 
 ## Author
 
