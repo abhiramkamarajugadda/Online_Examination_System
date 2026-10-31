@@ -145,7 +145,7 @@ Both services have free plans with no card needed.
 3. Fill in the environment variables Render asks for:
    | Variable | Value |
    |---|---|
-   | `SPRING_DATASOURCE_URL` | `jdbc:mysql://<aiven-host>:<port>/defaultdb?sslMode=REQUIRED` |
+   | `SPRING_DATASOURCE_URL` | `jdbc:mysql://<aiven-host>:<port>/examsphere?sslMode=REQUIRED&createDatabaseIfNotExist=true` (own `examsphere` schema, created on first start, so one free Aiven service can host several apps) |
    | `SPRING_DATASOURCE_USERNAME` | `avnadmin` |
    | `SPRING_DATASOURCE_PASSWORD` | Aiven password |
    | `ADMIN_EMAIL` | Admin login email |
