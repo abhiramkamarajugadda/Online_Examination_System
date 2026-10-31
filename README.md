@@ -1,386 +1,120 @@
-# 📝 Online Examination System
+# ExamSphere: Online Examination System
 
-<p align="center">
-  <b>A Java Spring Boot based Online Examination System</b>
-</p>
+A Spring Boot web application for running timed online exams, with separate Admin and Student workflows, automatic grading and result history.
 
-<p align="center">
-  Built with Java, Spring Boot, Spring Data JPA, JSP/JSTL and MySQL.
-</p>
+## Features
 
----
+**Student**
+- Register (full name, email, phone, gender, date of birth, institution) and log in with email and password
+- Dashboard listing available exams
+- Take a timed exam: countdown timer that auto-submits when time runs out, plus a warning before leaving the page
+- Attempt limit per exam (`maxAttempts`), checked on the server before grading
+- Automatic grading on submit: score, correct and incorrect counts, percentage and pass or fail status (pass mark 40%)
+- Answer review after submission, showing the selected and correct option for each question
+- Exam history and profile pages
 
-## 📌 Project Overview
+**Admin**
+- Dashboard with total exams, questions, students and attempts, plus the five most recent results
+- Create, edit and delete exams (title, description, duration, total marks, max attempts)
+- Add, edit, delete and view MCQ questions per exam (four options, correct answer, marks)
+- View all results
+- Manage students: list, edit and delete
 
-The **Online Examination System** is a web-based application designed to simplify and manage the process of conducting examinations online.
+## Tech Stack
 
-The application is developed using **Java and Spring Boot**, with **Spring MVC** for web request handling, **Spring Data JPA** for database operations, **JSP/JSTL** for the user interface, and **MySQL** for data storage.
+| Layer | Technology |
+|---|---|
+| Language | Java 21 |
+| Framework | Spring Boot 4.1.1, Spring Web MVC |
+| Persistence | Spring Data JPA, Hibernate, MySQL (`mysql-connector-j`) |
+| Views | JSP, JSTL (Tomcat Jasper), CSS, JavaScript |
+| Build | Maven (Maven Wrapper included) |
 
-The project includes a `database.sql` file for setting up the required database.
-
----
-
-## 🚀 Features
-
-### 👨‍🎓 Student
-
-* Student login
-* Access online examinations
-* View examination questions
-* Submit answers
-* Complete examinations
-* View examination results
-
-### 👨‍💼 Admin
-
-* Admin login
-* Manage users
-* Manage examinations
-* Manage questions
-* Manage examination data
-* View examination-related information
-
----
-
-## 🛠️ Technologies Used
-
-| Technology                | Purpose                       |
-| ------------------------- | ----------------------------- |
-| ☕ Java 21                 | Backend Development           |
-| 🌱 Spring Boot 4.1.1      | Application Framework         |
-| 🌐 Spring MVC             | Web Request Handling          |
-| 🗃️ Spring Data JPA       | Database Operations           |
-| 🔄 Hibernate              | ORM                           |
-| 🐬 MySQL                  | Database                      |
-| 📄 JSP                    | View Layer                    |
-| 🔧 JSTL                   | JSP Functionality             |
-| 🚀 Apache Tomcat / Jasper | JSP Processing                |
-| 📦 Maven                  | Build & Dependency Management |
-
----
-
-## 🏗️ Project Architecture
+## Architecture
 
 ```text
-                    ┌─────────────────────┐
-                    │     JSP / JSTL      │
-                    │    User Interface   │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │     Controller      │
-                    │     Spring MVC      │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │       Service       │
-                    │   Business Logic    │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │     Repository      │
-                    │   Spring Data JPA   │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │       MySQL         │
-                    │  online_exam_db     │
-                    └─────────────────────┘
+JSP views (WEB-INF/views)  ->  Controllers  ->  Services  ->  Spring Data JPA repositories  ->  MySQL
+
+src/main/java/com/mvc/
+  controller/   AuthController, AdminController, StudentController
+  model/        User, Exam, Question, Result, ExamHistory (JPA entities)
+  repository/   One JpaRepository per entity, with derived queries such as
+                countByStudent_IdAndExam_Id and findByExamId
+  service/      UserService, ExamService, QuestionService, ResultService, ExamHistoryService
+src/main/webapp/
+  WEB-INF/views/   17 JSP pages
+  js/app.js        Exam timer, auto-submit and question navigator
+  css/style.css
 ```
 
----
-
-## 📂 Project Structure
-
-```text
-Online-Examination-System/
-│
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── ...
-│   │   │
-│   │   ├── resources/
-│   │   │   └── ...
-│   │   │
-│   │   └── webapp/
-│   │       └── ...
-│   │
-│   └── test/
-│       └── ...
-│
-├── database.sql
-├── pom.xml
-├── mvnw
-├── mvnw.cmd
-└── README.md
-```
-
----
-
-## 🗄️ Database Setup
-
-The application uses **MySQL**.
-
-### Database Name
-
-```text
-online_exam_db
-```
-
-### Create Database
-
-```sql
-CREATE DATABASE online_exam_db;
-```
-
-### Import Database
-
-The project contains:
-
-```text
-database.sql
-```
-
-Open the file using **MySQL Workbench** and execute the SQL script.
-
-### Configure Database Connection
-
-Update your Spring Boot configuration:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/online_exam_db
-spring.datasource.username=root
-spring.datasource.password=YOUR_PASSWORD
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
-
-Replace `YOUR_PASSWORD` with your MySQL password.
-
----
-
-## ⚙️ Prerequisites
-
-Before running the project, make sure you have:
-
-* Java JDK 21
-* MySQL
-* Maven
-* Git
-* Eclipse / IntelliJ IDEA / Spring Tool Suite
-
----
-
-## ▶️ How to Run
-
-### 1. Clone the Repository
-
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-```
-
-### 2. Navigate to the Project
-
-```bash
-cd Online-Examination-System
-```
-
-### 3. Configure MySQL
-
-Create the `online_exam_db` database and execute the `database.sql` file.
-
-### 4. Configure Application
-
-Update the database username and password in the Spring Boot configuration file.
-
-### 5. Run the Application
-
-Using Maven:
-
-```bash
-mvn spring-boot:run
-```
-
-### Windows
-
-```cmd
-mvnw.cmd spring-boot:run
-```
-
-### Linux / macOS
-
-```bash
-./mvnw spring-boot:run
-```
-
----
-
-## 🌐 Access the Application
-
-Once the application starts successfully, open:
-
-```text
-http://localhost:8080/
-```
-
-The exact page URL depends on the controller mappings implemented in the project.
-
----
-
-## 🔐 User Roles
-
-The system includes user information and supports an **ADMIN** role.
-
-```text
-ADMIN
-```
-
-Student functionality is provided through the examination workflow implemented in the application.
-
----
-
-## 🧪 Testing
-
-Run the application tests using:
-
-```bash
-mvn test
-```
-
-On Windows:
-
-```cmd
-mvnw.cmd test
-```
-
----
-
-## 📦 Build
-
-Build the project using:
-
-```bash
-mvn clean package
-```
-
-Run the generated JAR:
-
-```bash
-java -jar target/EMS-0.0.1-SNAPSHOT.jar
-```
-
----
-
-## 📸 Screenshots
-
-Add your application screenshots here.
-
-Create a folder:
-
-```text
-screenshots/
-```
-
-Example:
-
-```text
-screenshots/
-├── login.png
-├── student-dashboard.png
-├── exam.png
-├── result.png
-└── admin-dashboard.png
-```
-
-Then add them to the README:
-
-```markdown
-## 📸 Screenshots
-
-### Login Page
-
-![Login Page](screenshots/login.png)
-
-### Student Dashboard
-
-![Student Dashboard](screenshots/student-dashboard.png)
-
-### Examination Page
-
-![Examination Page](screenshots/exam.png)
-
-### Result Page
-
-![Result Page](screenshots/result.png)
-
-### Admin Dashboard
-
-![Admin Dashboard](screenshots/admin-dashboard.png)
-```
-
----
-
-## 🔮 Future Enhancements
-
-* ⏱️ Online exam countdown timer
-* 🔐 Secure authentication
-* 🔑 Password encryption
-* 👥 Role-based authorization
-* 📝 Question bank management
-* 📊 Student performance analytics
-* 📈 Result dashboard
-* 🔎 Search and filtering
-* 📄 Pagination
-* 📧 Email result notifications
-* 🎨 Responsive Bootstrap UI
-* 🌐 REST API integration
-* 🐳 Docker support
-* ☁️ Cloud deployment
-
----
-
-## 🎯 Learning Outcomes
-
-This project provides practical experience with:
-
-* Java backend development
-* Spring Boot
-* Spring MVC
-* Spring Data JPA
-* Hibernate
-* MySQL database integration
-* JSP and JSTL
-* Maven
-* CRUD operations
-* Layered application architecture
-* Web application development
-
----
-
-## 👨‍💻 Author
-
-**Abhiram**
-
-**B.Tech – Computer Science Engineering**
-
-### Technologies
-
-`Java` `Spring Boot` `Spring MVC` `JPA` `Hibernate` `MySQL` `JSP` `JSTL` `Maven`
-
----
-
-## ⭐ Support
-
-If you find this project useful, please consider giving the repository a ⭐ on GitHub.
-
----
-
-## 📄 License
-
-This project is created for **educational and portfolio purposes**.
+## Routes
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/` | Home page |
+| GET, POST | `/register` | Student registration |
+| GET, POST | `/login` | Login (admin or student) |
+| GET | `/logout` | End the session |
+| GET | `/student/dashboard` | Student dashboard |
+| GET | `/student/exam/{id}` | Take an exam (alias `/student/take-exam/{id}`) |
+| POST | `/student/submit/{id}` | Submit answers and grade the attempt |
+| GET | `/student/history` | Past results |
+| GET | `/student/profile` | Student profile |
+| GET | `/admin/dashboard` | Admin dashboard |
+| GET | `/admin/exams` | List exams (alias `/admin/findAllExams`) |
+| GET | `/admin/exam/create` | Create exam form |
+| POST | `/admin/createExam` | Save a new exam |
+| GET | `/admin/exam/edit/{id}` | Edit exam form |
+| POST | `/admin/exam/update` | Update an exam |
+| GET | `/admin/deleteExam/{id}` | Delete an exam |
+| GET | `/admin/questions/{examId}` | Questions for an exam |
+| GET | `/admin/question/add` | Add question form |
+| POST | `/admin/addQuestion` | Save a question |
+| GET | `/admin/question/edit/{id}` | Edit question form |
+| POST | `/admin/question/update` | Update a question |
+| GET | `/admin/question/delete/{id}` | Delete a question |
+| GET | `/admin/results` | All results |
+| GET | `/admin/students` | List students |
+| GET | `/admin/student/edit/{id}` | Edit student form |
+| POST | `/admin/student/update` | Update a student |
+| GET | `/admin/student/delete/{id}` | Delete a student |
+
+## Data Model
+
+| Entity | Key fields | Relationships |
+|---|---|---|
+| `User` (`users`) | id, fullName, email, phoneNumber, gender, dob, institution, username, password, role | Has many results |
+| `Exam` | id, title, description, duration, totalMarks, maxAttempts | Has many questions |
+| `Question` | id, questionText, optionA to optionD, correctAnswer, marks | Many-to-one exam |
+| `Result` (`results`) | id, score, totalMarks, percentage, passStatus, correctCount, incorrectCount, attemptedAt | Many-to-one student and exam |
+| `ExamHistory` | id, userId, userEmail, examId, examTitle, score, totalMarks, attemptedAt | Denormalized attempt log |
+
+Tables are created by Hibernate (`spring.jpa.hibernate.ddl-auto=update`).
+
+## Getting Started
+
+**Prerequisites:** JDK 21, MySQL 8, Maven (or the included Maven Wrapper: `sh mvnw spring-boot:run`).
+
+1. Clone the repository.
+   ```bash
+   git clone https://github.com/abhiramkamarajugadda/Online_Examination_System.git
+   cd Online_Examination_System
+   ```
+2. Create the database used in `application.properties`.
+   ```sql
+   CREATE DATABASE online_exam;
+   ```
+3. Set `spring.datasource.username` and `spring.datasource.password` in `src/main/resources/application.properties` to your local MySQL values.
+4. Run the application.
+   ```bash
+   mvn spring-boot:run
+   ```
+   On Windows: `mvnw.cmd spring-boot:run`
+5. Open `http://localhost:4545`.
+
+The admin account is defined in `AuthController`; change it before any real use.
+
+## Author
+
+**Abhiram Kamarajugadda**
+GitHub: [abhiramkamarajugadda](https://github.com/abhiramkamarajugadda) | Portfolio: [abhiramkamarajugadda.github.io](https://abhiramkamarajugadda.github.io)
